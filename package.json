@@ -1,0 +1,12 @@
+{
+  "name": "railway-metadata-bounty-proof",
+  "private": true,
+  "type": "module",
+  "description": "Local synthetic proof for a reviewed support answer; no production connection.",
+  "scripts": {
+    "test": "node prove-metadata-only.mjs"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "0.5.10"
+  }
+}

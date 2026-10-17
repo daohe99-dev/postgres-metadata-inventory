@@ -1,0 +1,234 @@
+{
+  "tested_at_utc": "2026-10-17T10:27:00.514Z",
+  "status": "PASS",
+  "engine": "PGlite @electric-sql/pglite 0.5.10 (local PostgreSQL in WASM)",
+  "railway_connection_tested": false,
+  "production_data_used": false,
+  "scope": "Catalog report under a non-owner role with no SELECT on synthetic application or migration tables.",
+  "checks": [
+    "probe role has no SELECT on application rows",
+    "probe role has no SELECT on migration ledger rows",
+    "actual SELECT denied for public.athlete_records",
+    "actual SELECT denied for drizzle.__drizzle_migrations",
+    "catalog report succeeds without application SELECT",
+    "all scoped tables reported",
+    "migration ledger structure reported",
+    "dropped columns excluded",
+    "typed numeric column reported",
+    "identity property reported",
+    "foreign key reported",
+    "check constraint reported",
+    "unique index reported",
+    "index validity, readiness and live status included",
+    "no application or migration row sentinel in report",
+    "READ ONLY alone still permits row SELECT for authorized owner",
+    "READ ONLY blocks UPDATE even for owner",
+    "synthetic application rows unchanged"
+  ],
+  "postgresql_version": "PostgreSQL 18.6 (PGlite 0.5.10) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.5 (1db513782be24469589d7cb8a1f1834e9a33f271), 32-bit",
+  "metadata_example": {
+    "tables": [
+      {
+        "table": "__drizzle_migrations",
+        "schema": "drizzle"
+      },
+      {
+        "table": "athlete_records",
+        "schema": "public"
+      },
+      {
+        "table": "training_sessions",
+        "schema": "public"
+      }
+    ],
+    "columns": [
+      {
+        "type": "integer",
+        "table": "__drizzle_migrations",
+        "column": "id",
+        "schema": "drizzle",
+        "default": "nextval('drizzle.__drizzle_migrations_id_seq'::regclass)",
+        "identity": "",
+        "not_null": true,
+        "generated": ""
+      },
+      {
+        "type": "text",
+        "table": "__drizzle_migrations",
+        "column": "hash",
+        "schema": "drizzle",
+        "default": null,
+        "identity": "",
+        "not_null": true,
+        "generated": ""
+      },
+      {
+        "type": "bigint",
+        "table": "__drizzle_migrations",
+        "column": "created_at",
+        "schema": "drizzle",
+        "default": null,
+        "identity": "",
+        "not_null": false,
+        "generated": ""
+      },
+      {
+        "type": "integer",
+        "table": "athlete_records",
+        "column": "id",
+        "schema": "public",
+        "default": null,
+        "identity": "",
+        "not_null": true,
+        "generated": ""
+      },
+      {
+        "type": "text",
+        "table": "athlete_records",
+        "column": "private_note",
+        "schema": "public",
+        "default": null,
+        "identity": "",
+        "not_null": true,
+        "generated": ""
+      },
+      {
+        "type": "integer",
+        "table": "training_sessions",
+        "column": "id",
+        "schema": "public",
+        "default": null,
+        "identity": "a",
+        "not_null": true,
+        "generated": ""
+      },
+      {
+        "type": "integer",
+        "table": "training_sessions",
+        "column": "athlete_id",
+        "schema": "public",
+        "default": null,
+        "identity": "",
+        "not_null": true,
+        "generated": ""
+      },
+      {
+        "type": "numeric(8,2)",
+        "table": "training_sessions",
+        "column": "metric",
+        "schema": "public",
+        "default": "0",
+        "identity": "",
+        "not_null": false,
+        "generated": ""
+      }
+    ],
+    "indexes": [
+      {
+        "index": "__drizzle_migrations_pkey",
+        "table": "__drizzle_migrations",
+        "schema": "drizzle",
+        "is_live": true,
+        "is_ready": true,
+        "is_valid": true,
+        "definition": "CREATE UNIQUE INDEX __drizzle_migrations_pkey ON drizzle.__drizzle_migrations USING btree (id)"
+      },
+      {
+        "index": "athlete_records_pkey",
+        "table": "athlete_records",
+        "schema": "public",
+        "is_live": true,
+        "is_ready": true,
+        "is_valid": true,
+        "definition": "CREATE UNIQUE INDEX athlete_records_pkey ON public.athlete_records USING btree (id)"
+      },
+      {
+        "index": "sessions_athlete_metric",
+        "table": "training_sessions",
+        "schema": "public",
+        "is_live": true,
+        "is_ready": true,
+        "is_valid": true,
+        "definition": "CREATE UNIQUE INDEX sessions_athlete_metric ON public.training_sessions USING btree (athlete_id, metric)"
+      },
+      {
+        "index": "training_sessions_pkey",
+        "table": "training_sessions",
+        "schema": "public",
+        "is_live": true,
+        "is_ready": true,
+        "is_valid": true,
+        "definition": "CREATE UNIQUE INDEX training_sessions_pkey ON public.training_sessions USING btree (id)"
+      }
+    ],
+    "constraints": [
+      {
+        "table": "__drizzle_migrations",
+        "schema": "drizzle",
+        "constraint": "__drizzle_migrations_hash_not_null",
+        "definition": "NOT NULL hash"
+      },
+      {
+        "table": "__drizzle_migrations",
+        "schema": "drizzle",
+        "constraint": "__drizzle_migrations_id_not_null",
+        "definition": "NOT NULL id"
+      },
+      {
+        "table": "__drizzle_migrations",
+        "schema": "drizzle",
+        "constraint": "__drizzle_migrations_pkey",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "table": "athlete_records",
+        "schema": "public",
+        "constraint": "athlete_records_id_not_null",
+        "definition": "NOT NULL id"
+      },
+      {
+        "table": "athlete_records",
+        "schema": "public",
+        "constraint": "athlete_records_pkey",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "table": "athlete_records",
+        "schema": "public",
+        "constraint": "athlete_records_private_note_not_null",
+        "definition": "NOT NULL private_note"
+      },
+      {
+        "table": "training_sessions",
+        "schema": "public",
+        "constraint": "training_sessions_athlete_id_fkey",
+        "definition": "FOREIGN KEY (athlete_id) REFERENCES athlete_records(id)"
+      },
+      {
+        "table": "training_sessions",
+        "schema": "public",
+        "constraint": "training_sessions_athlete_id_not_null",
+        "definition": "NOT NULL athlete_id"
+      },
+      {
+        "table": "training_sessions",
+        "schema": "public",
+        "constraint": "training_sessions_id_not_null",
+        "definition": "NOT NULL id"
+      },
+      {
+        "table": "training_sessions",
+        "schema": "public",
+        "constraint": "training_sessions_metric_check",
+        "definition": "CHECK (metric >= 0::numeric)"
+      },
+      {
+        "table": "training_sessions",
+        "schema": "public",
+        "constraint": "training_sessions_pkey",
+        "definition": "PRIMARY KEY (id)"
+      }
+    ]
+  },
+  "sql_sha256": "b9e8e160eef49fa4eda8043443b90a5097a01fa388539e32c8da29274cd82e8f"
+}
